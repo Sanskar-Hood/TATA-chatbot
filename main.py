@@ -24,7 +24,7 @@ from langchain_community.vectorstores.vectara import (
 from langchain_community.document_loaders import PyPDFLoader
 
 
-loader = PyPDFLoader("Tata Nexon Brochure.pdf")
+loader = PyPDFLoader("punch-brochure.pdf")
 documents = loader.load()
 
 vectara = Vectara.from_documents(documents, embedding=None)
@@ -36,5 +36,20 @@ config = VectaraQueryConfig(
 )
 
 bot = vectara.as_chat(config)
+def bot_query(query):
+    print(bot.invoke(query)["answer"])
+while(1):
+    bot_query(query=input())
 
-print(bot.invoke("what is meaning of r16 here")["answer"])
+
+# output = {}
+# curr_key = None
+# for chunk in bot.stream("?"):
+#     for key in chunk:
+#         if key not in output:
+#             output[key] = chunk[key]
+#         else:
+#             output[key] += chunk[key]
+#         if key == "answer":
+#             print(chunk[key], end="", flush=True)
+#         curr_key = key
