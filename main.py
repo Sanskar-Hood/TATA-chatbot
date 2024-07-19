@@ -24,7 +24,7 @@ from langchain_community.vectorstores.vectara import (
 from langchain_community.document_loaders import PyPDFLoader
 
 
-loader = PyPDFLoader("punch-brochure.pdf")
+loader = PyPDFLoader("punch-brochure_merged.pdf")
 documents = loader.load()
 
 vectara = Vectara.from_documents(documents, embedding=None)
@@ -37,7 +37,7 @@ config = VectaraQueryConfig(
 
 bot = vectara.as_chat(config)
 def bot_query(query):
-    print(bot.invoke(query)["answer"])
+    return (bot.invoke(query)["answer"])
 while(1):
     bot_query(query=input())
 
